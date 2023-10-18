@@ -2,6 +2,7 @@ import streamlit as st
 import pickle
 import pandas as pd
 import requests
+import numpy as np
 
 def fetch_poster(movie_id):
     url = "https://api.themoviedb.org/3/movie/{m_id}?api_key=1101f53ced5f3dd9242cfd61c8cf3b48&language=en-US".format(m_id=movie_id)
@@ -13,7 +14,6 @@ def recommend(movie):
     def Sort_Tuple(tup):
         lst = len(tup)
         for i in range(0, lst):
-
             for j in range(0, lst - i - 1):
                 if (tup[j][1] < tup[j + 1][1]):
                     temp = tup[j]
@@ -33,7 +33,19 @@ def recommend(movie):
     return y,y_poster
 movies_list = pickle.load(open('movies_dict.pkl','rb'))
 movies = pd.DataFrame(movies_list)
-similarity=pickle.load(open('similarity.pkl','rb'))
+
+#similarity
+similarity1=pickle.load(open('similarity1.pkl','rb'))
+similarity2=pickle.load(open('similarity2.pkl','rb'))
+similarity3=pickle.load(open('similarity3.pkl','rb'))
+similarity4=pickle.load(open('similarity4.pkl','rb'))
+similarity5=pickle.load(open('similarity5.pkl','rb'))
+similarity6=pickle.load(open('similarity6.pkl','rb'))
+similarity7=pickle.load(open('similarity7.pkl','rb'))
+similarity8=pickle.load(open('similarity8.pkl','rb'))
+similarity9=pickle.load(open('similarity9.pkl','rb'))
+similarity10=pickle.load(open('similarity10.pkl','rb'))
+similarity=np.concatenate((similarity1,similarity2,similarity3,similarity4,similarity5,similarity6,similarity7,similarity8,similarity9,similarity10))
 
 st.title('Movie Recommender System')
 
@@ -60,6 +72,3 @@ if st.button("Recommend"):
     with col5:
         st.text(names[4])
         st.image(poster[4])
-
-
-print(fetch_poster(65))
