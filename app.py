@@ -23,7 +23,7 @@ def recommend(movie):
 
     movie_index = movies[movies['title'] == movie].index[0]
     distances = similarity[movie_index]
-    sorted_distances = Sort_Tuple(list(enumerate(similarity[movie_index])))[1:6]
+    sorted_distances = Sort_Tuple(list(enumerate(similarity[movie_index])))[1:10]
     y = []
     y_poster=[]
     for i in sorted_distances:
